@@ -8,17 +8,18 @@ public class Fabrica {
         return instance;
     }
 
-    public static FabricaAbstrata obterServico(String servico) {
+    public FabricaAbstrata obterFabrica(String fabrica) {
         Class classe = null;
         Object objeto = null;
+
         try {
-            classe = Class.forName("abstractfactory.Fabrica" + servico);
+            classe = Class.forName(fabrica);
             objeto = classe.newInstance();
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Serviço inexistente");
+            throw new IllegalArgumentException("Fabrica inexistente");
         }
         if (!(objeto instanceof FabricaAbstrata)) {
-            throw new IllegalArgumentException("Serviço inválido");
+            throw new IllegalArgumentException("Fabrica inválida");
         }
         return (FabricaAbstrata) objeto;
     }
